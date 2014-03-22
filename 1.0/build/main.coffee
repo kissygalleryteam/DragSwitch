@@ -24,7 +24,9 @@ KISSY.add (S, Node, Event, UA) ->
             moveSelf       : true
             moveEls        : []
             maxDistance    : 99999    # 注意正负值
-            validDistance  : null  
+            validDistance  : null   
+            # passCallback : null  # 改为自定义事件
+            # failCallback : null
             checkEnabled      : null
             friction       : false
             transition     : true
@@ -174,13 +176,14 @@ KISSY.add (S, Node, Event, UA) ->
       return if !@eventType or !@enabled or !@effectBind
       if @istouchStart and @isSendStart
         @touchEndHandler(e)
+      # @istouchStart = false
+      # @isSendStart = false
+      # @eventType = null
 
     touchEndHandler: (e)->
-
       restoreTransition(@actuMoveEls)
-
       if @effectBind.transition
-        @transitionEndHandler(e)        
+        @transitionEndHandler()        
 
       if abs(@distance) >= abs(@effectBind.validDistance)
         @effectBind.passed = true
@@ -192,12 +195,10 @@ KISSY.add (S, Node, Event, UA) ->
         @fire "#{@eventType}Failed", e
       @fire @eventType + "TouchEnd touchEnd", e
 
-    transitionEndHandler: (e)->
+    transitionEndHandler: ->
       # 计算时间
       speed = abs(@_startPoint - @_lastPoint) / (@startTimeS - @lastTimeS)
-      # speed = 4
-      # speed = Math.sqrt speed
-      speed = if speed < 4 then Math.sqrt speed else 4
+      speed = 4
       remain = abs(@effectBind.maxDistance - @distance)
       duration = remain / speed + "ms"
       @actuMoveEls.forEach (el)->
@@ -206,7 +207,7 @@ KISSY.add (S, Node, Event, UA) ->
       # 只取第一个触发 transitionEnd 事件
       transitionEnd = =>
         @fire "#{@eventType}MoveEnd", e
-        restoreTransition(@actuMoveEls)
+        # cleanTransition(@actuMoveEls)
         @actuMoveEls[0].detach "#{jPrefix}TransitionEnd", transitionEnd
 
       @actuMoveEls[0].on "#{jPrefix}TransitionEnd", transitionEnd

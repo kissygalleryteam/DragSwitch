@@ -135,7 +135,8 @@ module.exports = function(grunt) {
 						src: [
 							'**/*.css',
 							'!build/**/*.css',
-							'!demo/**/*.css'
+							'!demo/**/*.css',
+                            'main.*'
 						], 
 						dest: '<%= pkg.version %>/build/', 
 						filter: 'isFile'

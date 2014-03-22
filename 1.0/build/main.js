@@ -269,7 +269,7 @@
       DragSwitch.prototype.touchEndHandler = function(e) {
         restoreTransition(this.actuMoveEls);
         if (this.effectBind.transition) {
-          this.transitionEndHandler(e);
+          this.transitionEndHandler();
         }
         if (abs(this.distance) >= abs(this.effectBind.validDistance)) {
           this.effectBind.passed = true;
@@ -282,11 +282,11 @@
         return this.fire(this.eventType + "TouchEnd touchEnd", e);
       };
 
-      DragSwitch.prototype.transitionEndHandler = function(e) {
+      DragSwitch.prototype.transitionEndHandler = function() {
         var duration, remain, speed, transitionEnd,
           _this = this;
         speed = abs(this._startPoint - this._lastPoint) / (this.startTimeS - this.lastTimeS);
-        speed = speed < 4 ? Math.sqrt(speed) : 4;
+        speed = 4;
         remain = abs(this.effectBind.maxDistance - this.distance);
         duration = remain / speed + "ms";
         this.actuMoveEls.forEach(function(el) {
@@ -294,7 +294,6 @@
         });
         transitionEnd = function() {
           _this.fire("" + _this.eventType + "MoveEnd", e);
-          restoreTransition(_this.actuMoveEls);
           return _this.actuMoveEls[0].detach("" + jPrefix + "TransitionEnd", transitionEnd);
         };
         return this.actuMoveEls[0].on("" + jPrefix + "TransitionEnd", transitionEnd);
