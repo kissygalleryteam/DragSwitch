@@ -7,7 +7,8 @@ setTimeout(function(){
                 path: "./assets"
             },
             "gallery/dragswitch" : {
-                path: "../../"
+                path: "../../../",
+                ignorePackageNameInUri: true
             }
         }
     })

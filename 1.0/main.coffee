@@ -196,8 +196,8 @@ KISSY.add (S, Node, Event, UA) ->
       # 计算时间
       speed = abs(@_startPoint - @_lastPoint) / (@startTimeS - @lastTimeS)
       # speed = 4
-      # speed = Math.sqrt speed
-      speed = if speed < 4 then Math.sqrt speed else 4
+      speed = Math.sqrt speed
+      speed = if speed < 4 then 4 else speed
       remain = abs(@effectBind.maxDistance - @distance)
       duration = remain / speed + "ms"
       @actuMoveEls.forEach (el)->

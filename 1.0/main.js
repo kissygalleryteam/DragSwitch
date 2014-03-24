@@ -286,7 +286,8 @@
         var duration, remain, speed, transitionEnd,
           _this = this;
         speed = abs(this._startPoint - this._lastPoint) / (this.startTimeS - this.lastTimeS);
-        speed = speed < 4 ? Math.sqrt(speed) : 4;
+        speed = Math.sqrt(speed);
+        speed = speed < 4 ? 4 : speed;
         remain = abs(this.effectBind.maxDistance - this.distance);
         duration = remain / speed + "ms";
         this.actuMoveEls.forEach(function(el) {
