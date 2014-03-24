@@ -16,7 +16,7 @@ DragSwitch是一个拖拽切换组件。
 ## API说明
 
     var dragswitch = new DragSwitch(el, {
-        // 敏感度，当两个实例重叠时作为优先级判断用，值约低约优先触发，建议 8 以上
+        // 敏感度，当两个实例重叠时作为优先级判断用，值越低越优先触发，建议 8 以上
         senDistance : 10,
         // 手势识别角度，建议保持默认
         angle       : Math.PI / 4,
