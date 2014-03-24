@@ -14,5 +14,5 @@
 	"reserveServerPort":"8080",
     "type": "kissy-gallery",
     "type-url": "http://gallery.kissyui.com/guide",
-    "cover": "http://img.la/orange/300x120"
+    "cover": "http://img.la/mottle/300x120?s=%20"
 }
