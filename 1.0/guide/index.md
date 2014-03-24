@@ -4,7 +4,7 @@ DragSwitch是一个拖拽切换组件。
 
 * 版本：1.0
 * 作者：筱谷
-* demo：[http://gallery.kissyui.com/dragswitch/1.0/demo/index.html](http://gallery.kissyui.com/dragswitch/1.0/demo/index.html)
+* demo：[http://gallery.kissyui.com/DragSwitch/1.0/demo/index.html](http://gallery.kissyui.com/DragSwitch/1.0/demo/index.html)
 
 ## 初始化组件
 		
