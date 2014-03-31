@@ -19,10 +19,13 @@ module.exports = function(grunt) {
         // 添加
         kmc: {
             options: {
+                // comboOnly: true,
+                // fixModuleName:true,
                 packages: [
                     {
                         name: '<%= pkg.name %>',
-                        path: '../'
+                        path: './',
+                        ignorePackageNameInUri: true
                     }
                 ],
                 map: [["<%= pkg.name %>/", "gallery/<%= pkg.name %>/"]]
