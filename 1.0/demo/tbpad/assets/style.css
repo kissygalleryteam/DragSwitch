@@ -177,34 +177,34 @@ textarea {
   }
 }
 .C_PFadeIn_1 {
-  -webkit-animation: fadein 300ms ease 60ms 1 normal both;
+  -webkit-animation: fadein 300ms ease 60ms 1 normal none;
 }
 .C_PFadeIn_2 {
-  -webkit-animation: fadein 300ms ease 120ms 1 normal both;
+  -webkit-animation: fadein 300ms ease 120ms 1 normal none;
 }
 .C_PFadeIn_3 {
-  -webkit-animation: fadein 300ms ease 180ms 1 normal both;
+  -webkit-animation: fadein 300ms ease 180ms 1 normal none;
 }
 .C_PFadeIn_4 {
-  -webkit-animation: fadein 300ms ease 240ms 1 normal both;
+  -webkit-animation: fadein 300ms ease 240ms 1 normal none;
 }
 .C_PFadeIn_5 {
-  -webkit-animation: fadein 300ms ease 300ms 1 normal both;
+  -webkit-animation: fadein 300ms ease 300ms 1 normal none;
 }
 .C_PFadeIn_6 {
-  -webkit-animation: fadein 300ms ease 360ms 1 normal both;
+  -webkit-animation: fadein 300ms ease 360ms 1 normal none;
 }
 .C_PFadeIn_7 {
-  -webkit-animation: fadein 300ms ease 420ms 1 normal both;
+  -webkit-animation: fadein 300ms ease 420ms 1 normal none;
 }
 .C_PFadeIn_8 {
-  -webkit-animation: fadein 300ms ease 480ms 1 normal both;
+  -webkit-animation: fadein 300ms ease 480ms 1 normal none;
 }
 .C_PFadeIn_9 {
-  -webkit-animation: fadein 300ms ease 540ms 1 normal both;
+  -webkit-animation: fadein 300ms ease 540ms 1 normal none;
 }
 .C_PFadeIn_10 {
-  -webkit-animation: fadein 300ms ease 600ms 1 normal both;
+  -webkit-animation: fadein 300ms ease 600ms 1 normal none;
 }
 @-webkit-keyframes navrotate {
   0% {
