@@ -2,7 +2,7 @@
 
 DragSwitch是一个拖拽切换组件。
 
-* 版本：1.0
+* 版本：1.1
 * 作者：筱谷
 * demo：[http://gallery.kissyui.com/DragSwitch/1.0/demo/index.html](http://gallery.kissyui.com/DragSwitch/1.0/demo/index.html)
 
@@ -63,3 +63,9 @@ DragSwitch是一个拖拽切换组件。
     dragswitch.on('rightMoveEnd', function(ev){
         console.log("END!!!");
     })
+
+## 更新记录
+
+* 1.1 - 20140403
+
+    * 添加鼠标和 PointerEvents 的支持
