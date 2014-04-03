@@ -243,4 +243,3 @@ KISSY.add (S, Node, Event, UA) ->
         setMatrix el, translate(el.matrixState, @distance, !@isVertical)
 ,
   requires: ["node", "event", "ua"]
-

@@ -142,11 +142,17 @@ gallery/DragSwitch/1.0/index
         _ref = this.config.binds;
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           item = _ref[_i];
-          if (!item || !item.moveEls) {
+          if (!item || S.isEmptyObject(item)) {
             continue;
+          }
+          if (item.transition == null) {
+            item.transition = true;
           }
           if (item.moveSelf == null) {
             item.moveSelf = true;
+          }
+          if (item.moveEls == null) {
+            item.moveEls = [];
           }
           _ref1 = item.moveEls;
           for (key = _j = 0, _len1 = _ref1.length; _j < _len1; key = ++_j) {
@@ -160,23 +166,23 @@ gallery/DragSwitch/1.0/index
       DragSwitch.prototype.bindEvents = function() {
         var _this = this;
         if (this.isSelector) {
-          $('body').delegate("touchstart", this.el, function(ev) {
+          $('body').delegate("touchstart pointerdown mousedown", this.el, function(ev) {
             return _this.touchStart(ev);
           });
-          $('body').delegate("touchmove", this.el, function(ev) {
+          $('body').delegate("touchmove pointermove mousemove", this.el, function(ev) {
             return _this.touchMove(ev);
           });
-          return $('body').delegate("touchend", this.el, function(ev) {
+          return $('body').delegate("touchend pointerup mouseup", this.el, function(ev) {
             return _this.touchEnd(ev);
           });
         } else {
-          this.el.on("touchstart", function(ev) {
+          this.el.on("touchstart pointerdown mousedown", function(ev) {
             return _this.touchStart(ev);
           });
-          this.el.on("touchmove", function(ev) {
+          this.el.on("touchmove pointermove mousemove", function(ev) {
             return _this.touchMove(ev);
           });
-          return this.el.on("touchend", function(ev) {
+          return this.el.on("touchend pointerup mouseup", function(ev) {
             return _this.touchEnd(ev);
           });
         }
@@ -198,7 +204,7 @@ gallery/DragSwitch/1.0/index
         this.eventType = null;
         this.key = null;
         this.actuMoveEls = [];
-        this.startPoint = [ev.touches[0].pageX, ev.touches[0].pageY];
+        this.startPoint = [ev.pageX || ev.touches[0].pageX, ev.pageY || ev.touches[0].pageY];
         return this.originalEl = this.isSelector && (parent = $(ev.target).parent(this.el)) ? parent : $(ev.currentTarget);
       };
 
@@ -212,7 +218,7 @@ gallery/DragSwitch/1.0/index
           return;
         }
         ev = e.originalEvent || e;
-        point = [ev.touches[0].pageX, ev.touches[0].pageY];
+        point = [ev.pageX || ev.touches[0].pageX, ev.pageY || ev.touches[0].pageY];
         oPoint = this.startPoint;
         angleDelta = abs((oPoint[1] - point[1]) / (point[0] - oPoint[0]));
         distance = [point[0] - oPoint[0], point[1] - oPoint[1]];
@@ -265,10 +271,12 @@ gallery/DragSwitch/1.0/index
       };
 
       DragSwitch.prototype.touchEnd = function(e) {
+        this.istouchStart = false;
         if (!this.eventType || !this.enabled || !this.effectBind) {
           return;
         }
-        if (this.istouchStart && this.isSendStart) {
+        if (this.isSendStart) {
+          this.isSendStart = false;
           return this.touchEndHandler(e);
         }
       };
