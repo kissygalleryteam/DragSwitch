@@ -135,7 +135,7 @@
         _ref = this.config.binds;
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           item = _ref[_i];
-          if (!item || S.isEmptyObject(item)) {
+          if (!item || !item.validDistance) {
             continue;
           }
           if (item.transition == null) {

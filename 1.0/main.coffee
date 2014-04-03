@@ -93,7 +93,7 @@ KISSY.add (S, Node, Event, UA) ->
       @realEl = $ @el
       @tanAngel = Math.tan(@config.angle)
       for item in @config.binds
-        continue if !item or S.isEmptyObject(item)
+        continue if !item or !item.validDistance
         item.transition ?= true
         item.moveSelf = true if !item.moveSelf?
         item.moveEls ?= []
@@ -243,3 +243,4 @@ KISSY.add (S, Node, Event, UA) ->
         setMatrix el, translate(el.matrixState, @distance, !@isVertical)
 ,
   requires: ["node", "event", "ua"]
+
