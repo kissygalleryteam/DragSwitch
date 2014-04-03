@@ -1,5 +1,21 @@
 @fadeDuration : 300ms;
 
+.transform(@str) {
+    -webkit-transform: @str;
+    -moz-transform: @str;
+    -ms-transform: @str;
+    -o-transform: @str;
+    transform: @str;
+}
+
+.animation(@str) {
+    -webkit-animation: @str;
+    -moz-animation: @str;
+    -ms-animation: @str;
+    -o-animation: @str;
+    animation: @str;
+}
+
 
 // 生成 keyframes
 ._loop(@counter) when (@counter > 0) {
@@ -24,9 +40,7 @@
 // 生成 class
 .C_PFadeIn(@delay) {
     .C_PFadeIn_@{delay} {
-        // -webkit-mask-box-image: -webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0));
-        // opacity: 0;
-        -webkit-animation: fadein @fadeDuration ease (@delay*60ms) 1 normal none;
+        .animation("fadein @fadeDuration ease (@{delay}*60ms) 1 normal none");
     }
 }
 

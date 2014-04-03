@@ -93,21 +93,23 @@ KISSY.add (S, Node, Event, UA) ->
       @realEl = $ @el
       @tanAngel = Math.tan(@config.angle)
       for item in @config.binds
-        continue if !item or !item.moveEls
+        continue if !item or S.isEmptyObject(item)
+        item.transition ?= true
         item.moveSelf = true if !item.moveSelf?
+        item.moveEls ?= []
         for value, key in item.moveEls
           item.moveEls[key] = $(value)
       @bindEvents()
 
     bindEvents: ->
       if @isSelector
-        $('body').delegate "touchstart", @el, (ev) => @touchStart(ev)
-        $('body').delegate "touchmove", @el, (ev) => @touchMove(ev)
-        $('body').delegate "touchend", @el, (ev) => @touchEnd(ev)
+        $('body').delegate "touchstart pointerdown mousedown", @el, (ev) => @touchStart(ev)
+        $('body').delegate "touchmove pointermove mousemove", @el, (ev) => @touchMove(ev)
+        $('body').delegate "touchend pointerup mouseup", @el, (ev) => @touchEnd(ev)
       else
-        @el.on "touchstart", (ev) => @touchStart(ev)
-        @el.on "touchmove", (ev) => @touchMove(ev)
-        @el.on "touchend", (ev) => @touchEnd(ev)
+        @el.on "touchstart pointerdown mousedown", (ev) => @touchStart(ev)
+        @el.on "touchmove pointermove mousemove", (ev) => @touchMove(ev)
+        @el.on "touchend pointerup mouseup", (ev) => @touchEnd(ev)
 
     touchStart: (e)->
       return if @disable
@@ -120,14 +122,14 @@ KISSY.add (S, Node, Event, UA) ->
       @eventType = null
       @key = null
       @actuMoveEls = []
-      @startPoint = [ev.touches[0].pageX, ev.touches[0].pageY]
+      @startPoint = [ev.pageX || ev.touches[0].pageX, ev.pageY || ev.touches[0].pageY]
       @originalEl = if @isSelector && parent = $(ev.target).parent(@el) then parent else $(ev.currentTarget)
 
     touchMove: (e)->
       return if !@istouchStart
       return if @isSendStart && !@effectBind
       ev = e.originalEvent || e # kissy mini 只有原生事件对象
-      point = [ev.touches[0].pageX, ev.touches[0].pageY]
+      point = [ev.pageX || ev.touches[0].pageX, ev.pageY || ev.touches[0].pageY]
       oPoint = @startPoint
       angleDelta = abs((oPoint[1] - point[1]) / (point[0] - oPoint[0])) # 这是水平方向的
       distance = [point[0] - oPoint[0], point[1] - oPoint[1]]
@@ -171,8 +173,10 @@ KISSY.add (S, Node, Event, UA) ->
         @move point
 
     touchEnd: (e)->
+      @istouchStart = false
       return if !@eventType or !@enabled or !@effectBind
-      if @istouchStart and @isSendStart
+      if @isSendStart
+        @isSendStart = false
         @touchEndHandler(e)
 
     touchEndHandler: (e)->
@@ -239,4 +243,3 @@ KISSY.add (S, Node, Event, UA) ->
         setMatrix el, translate(el.matrixState, @distance, !@isVertical)
 ,
   requires: ["node", "event", "ua"]
-
