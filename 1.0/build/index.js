@@ -362,10 +362,9 @@ gallery/DragSwitch/1.0/index
  * @author 筱谷<xiaogu.gxb@taobao.com>
  * @module dragswitch
  **/
-KISSY.add('gallery/DragSwitch/1.0/index',['./main'], function (S, require) {
-    var Dragswitch = require('./main');
+KISSY.add('gallery/DragSwitch/1.0/index',function (S, Dragswitch) {
     return Dragswitch;
-});
+}, {requires:['./main']});
 
 
 
