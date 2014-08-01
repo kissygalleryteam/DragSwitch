@@ -1,0 +1,124 @@
+@fadeDuration : 300ms;
+
+.transform(@str) {
+    -webkit-transform: @str;
+    -moz-transform: @str;
+    -ms-transform: @str;
+    -o-transform: @str;
+    transform: @str;
+}
+
+.animation(@str) {
+    -webkit-animation: @str;
+    -moz-animation: @str;
+    -ms-animation: @str;
+    -o-animation: @str;
+    animation: @str;
+}
+
+
+// 生成 keyframes
+._loop(@counter) when (@counter > 0) {
+    ._loop((@counter - 8));    // next iteration
+    @percent : @counter * 1%;
+    @opacity : @counter / 100; 
+    @{percent} {
+        // -webkit-mask-box-image: -webkit-linear-gradient(rgba(0,0,0,@opacity), rgba(0,0,0,@opacity));
+    }
+}
+
+@-webkit-keyframes fadein {
+    // ._loop(100)
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+// 生成 class
+.C_PFadeIn(@delay) {
+    .C_PFadeIn_@{delay} {
+        .animation("fadein @fadeDuration ease (@{delay}*60ms) 1 normal none");
+    }
+}
+
+.loop(@counter) when (@counter > 0) {
+    .loop((@counter - 1));    // next iteration
+    .C_PFadeIn(@counter);
+}
+
+.loop(10);
+
+@-webkit-keyframes navrotate {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(0) rotate(-450deg);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1) rotate(0deg);
+    }
+}
+
+@-webkit-keyframes navitem {
+    0% {
+        visibility: hidden;
+    }
+    100% {
+        visibility: visible;
+    }
+}
+
+@-webkit-keyframes navshow {
+    0% {
+        -webkit-transform: scale(1);
+    }
+
+    50% {
+        -webkit-transform: scale(0);
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+    }
+}
+
+@-webkit-keyframes runfor {
+    0% {
+        -webkit-transform: translateX(0) scale(1);
+    }
+
+    30% {
+        -webkit-transform: translateX(0) scale(.5);
+    }
+
+    70% {
+        -webkit-transform: translateX(-100%) scale(.5);
+    }
+
+    100% {
+        -webkit-transform: translateX(-100%) scale(1);
+    }
+}
+
+@-webkit-keyframes runback {
+    0% {
+        -webkit-transform: translateX(-100%) scale(1);
+    }
+
+    30% {
+        -webkit-transform: translateX(-100%) scale(.5);
+    }
+
+    70% {
+        -webkit-transform: translateX(0) scale(0.5);
+    }
+
+    100% {
+        -webkit-transform: translateX(0) scale(1);
+    }
+}
+
